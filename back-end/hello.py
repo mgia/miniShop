@@ -38,7 +38,7 @@ class Category(db.Model):
 
 class ItemCategory(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer)
+	category_id = db.Column(db.Integer)
 	item_id = db.Column(db.Integer)
 
 # Tokenization
@@ -56,6 +56,8 @@ def token_required(f):
 		try:
 			data = jwt.decode(token, app.config['SECRET_KEY'])
 			current_user = User.query.filter_by(public_id=data['public_id']).first()
+			if not current_user:
+				return jsonify({ 'message' : 'Token is invalid'})
 		except:
 			return jsonify({ 'message' : 'Token is invalid'})
 
@@ -102,18 +104,18 @@ def get_one_user(current_user):
 	return jsonify({ 'user': user_data })
 
 @app.route('/user', methods=['POST'])
-@token_required
-def create_user(current_user):
+# @token_required
+def create_user():
 
-	if not current_user.admin:
-		return jsonify({ 'message': 'Reserved admin method.'})
+	# if not current_user.admin:
+		# return jsonify({ 'message': 'Reserved admin method.'})
 
 	data = request.get_json()
 
 	hashed_password = generate_password_hash(data['password'], method='sha256')
 
-	new_user = User(public_id=str(uuid.uuid4()), name=data['name'], password=hashed_password, admin=False)
-
+	new_user = User(public_id=str(uuid.uuid4()), name=data['name'], password=hashed_password, admin=True)
+	print(new_user)
 	db.session.add(new_user)
 	db.session.commit()
 
@@ -182,7 +184,7 @@ def delete_user(current_user, public_id):
 	return jsonify({ 'message' : 'User has been deleted' })
 
 # Login routes
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def login():
 	auth = request.authorization
 
@@ -354,6 +356,7 @@ def get_all_orders(current_user):
 		order_data['id'] = order.id
 		order_data['user_id'] = order.user_id
 		order_data['item_id'] = order.item_id
+		order_data['quantity'] = order.quantity
 		order_data['timestamp'] = order.timestamp
 		output.append(order_data)
 
@@ -429,6 +432,89 @@ def delete_order(current_user, id):
 	return jsonify({ 'message' : 'Order has been deleted' })
 
 # ItemCategory Routes
+@app.route('/itemcategory', methods=['GET'])
+def get_all_relations():
+
+	relations = ItemCategory.query.all()
+
+	output = []
+
+	for relation in relations:
+		relation_data = {}
+		relation_data['id'] = relation.id
+		relation_data['category_id'] = relation.category_id
+		relation_data['item_id'] = relation.item_id
+		output.append(relation_data)
+
+	return jsonify({ 'all' : output })
+
+@app.route('/itemcategory/<category_id>', methods=['GET'])
+def get_category_items(category_id):
+
+	relations = ItemCategory.query.filter_by(category_id=category_id)
+
+	output = []
+
+	for relation in relations:
+		output.append(relation.item_id)
+
+	return jsonify({ str(category_id) : output })
+
+@app.route('/itemcategory', methods=['POST'])
+@token_required
+def create_item_category(current_user):
+
+	if not current_user.admin:
+		return jsonify({ 'message' : 'Reserved admin rights.' })
+
+	data = request.get_json()
+
+	if not data:
+		return jsonify({ 'message' : 'No parameters specified.' })
+
+	new_item_category = ItemCategory(item_id=data['item_id'], category_id=data['category_id'])
+
+	db.session.add(new_item_category)
+	db.session.commit()
+
+	return jsonify({ 'message' : 'Item Category have been created'})
+
+@app.route('/itemcategory/<id>', methods=['PUT'])
+@token_required
+def edit_item_category(current_user, id):
+
+	if not current_user.admin:
+		return jsonify({ 'message' : 'Reserved admin method.'})
+
+	data = request.get_json()
+
+	if not data:
+		return jsonify({ 'message' : 'No parameters specified'})
+
+	# Disable changing order id
+	data.pop('id', None)
+
+	ItemCategory.query.filter_by(id=id).update(data)
+	db.session.commit()
+
+	return jsonify({ 'message' : 'Item Category has been edited.'})
+
+@app.route('/itemcategory/<id>', methods=['DELETE'])
+@token_required
+def delete_itemcategory(current_user, id):
+
+	if not current_user.admin:
+		return jsonify({ 'message': 'Reserved admin method.'})
+
+	item = ItemCategory.query.filter_by(id=id).first()
+
+	if not item:
+		return jsonify({ 'message' : 'No itemcategory found!' })
+
+	db.session.delete(item)
+	db.session.commit()
+	return jsonify({ 'message' : 'Item Category has been deleted' })
+
 
 if __name__ == '__main__':
 	app.run(debug=True)
