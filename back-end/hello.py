@@ -9,7 +9,7 @@ import datetime
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'thisisecret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////nfs/2017/m/mtan/projects/php/rush00/back-end/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////nfs/2017/m/mtan/projects/php/github/back-end/test.db'
 
 db = SQLAlchemy(app)
 # Data models
@@ -24,6 +24,8 @@ class Item(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(50))
 	description = db.Column(db.String(100))
+	image_url = db.Column(db.String(200))
+	price = db.Column(db.Integer)
 
 class Order(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -103,7 +105,7 @@ def get_one_user(current_user):
 
 	return jsonify({ 'user': user_data })
 
-@app.route('/user', methods=['POST'])
+@app.route('/user/', methods=['POST'])
 # @token_required
 def create_user():
 
@@ -112,9 +114,12 @@ def create_user():
 
 	data = request.get_json()
 
+	if not data:
+		return jsonify({ 'message' : 'No parameters specified'})
+
 	hashed_password = generate_password_hash(data['password'], method='sha256')
 
-	new_user = User(public_id=str(uuid.uuid4()), name=data['name'], password=hashed_password, admin=True)
+	new_user = User(public_id=str(uuid.uuid4()), name=data['name'], password=hashed_password, admin=False)
 	print(new_user)
 	db.session.add(new_user)
 	db.session.commit()
