@@ -1,3 +1,18 @@
-.div {
+/* .div {
 	font-size: 100px;
+} */
+.registert {
+	border: 1px solid black;
+	margin-top: 20px;
+    margin-left: 10%;
+    width: 110px;
+    font-size: 25px;
+    font-style: none;
+	font-family: Helvetica, sans-serif;
+    text-align: center;
+}
+
+form{
+	display: inline-block;
+	margin-left: 10%;
 }
