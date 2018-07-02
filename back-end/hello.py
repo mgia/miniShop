@@ -189,7 +189,7 @@ def delete_user(current_user, public_id):
 	return jsonify({ 'message' : 'User has been deleted' })
 
 # Login routes
-@app.route('/login', methods=['POST'])
+@app.route('/login/', methods=['POST'])
 def login():
 	auth = request.authorization
 
@@ -206,7 +206,7 @@ def login():
 	return jsonify({'token' : token.decode('UTF-8')})
 
 # Item routes
-@app.route('/item', methods=['GET'])
+@app.route('/item/', methods=['GET'])
 def get_all_items():
 
 	items = Item.query.all()
@@ -221,7 +221,7 @@ def get_all_items():
 
 	return jsonify({ 'items' : output})
 
-@app.route('/item', methods=['POST'])
+@app.route('/item/', methods=['POST'])
 @token_required
 def create_item(current_user):
 
@@ -280,7 +280,7 @@ def delete_item(current_user, id):
 	return jsonify({ 'message' : 'Item has been deleted' })
 
 # Category Routes
-@app.route('/category', methods=['GET'])
+@app.route('/category/', methods=['GET'])
 def get_all_categories():
 
 	categories = Category.query.all()
