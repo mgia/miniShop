@@ -34,6 +34,9 @@ class Register extends Component {
 				alert("New user created. Please log in.")
 				this.setState({ redirect : true })
 			})
+			.catch( (err) => {
+				console.log(err)
+			})
 		} else {
 			this.setState({ error : "Error: Username & password must both be 6+ characters." })
 		}
@@ -71,4 +74,5 @@ class Register extends Component {
 		)
 	}
 }
+
 export default Register
