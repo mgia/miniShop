@@ -217,6 +217,8 @@ def get_all_items():
 		item_data['id'] = item.id
 		item_data['name'] = item.name
 		item_data['description'] = item.description
+		item_data['price'] = item.price
+		item_data['image_url'] = item.image_url
 		output.append(item_data)
 
 	return jsonify({ 'items' : output})
@@ -230,7 +232,7 @@ def create_item(current_user):
 
 	data = request.get_json()
 
-	new_item = Item(name=data['name'], description=data['description'])
+	new_item = Item(name=data['name'], description=data['description'], image_url=data['image_url'], price=data['price'])
 	db.session.add(new_item)
 	db.session.commit()
 
