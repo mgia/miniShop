@@ -1,6 +1,15 @@
 nav ul li{
 	list-style: none;
 }
+h1 {
+	margin-top: 20px;
+    margin-left: 10%;
+    width: 200px;
+    font-size: 35px;
+    font-style: normal;
+    font-family: Helvetica, sans-serif;
+    text-align: left;
+}
 .header {
 	border: 1px solid black;
 	height: 235px;
