@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './styles.css'
 
 class Preview extends Component {
 
@@ -28,7 +29,7 @@ class Preview extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="preview">
 				<b>Cart Preview</b><br/>
 				Number of Items: {this.state.amount}<br/>
 				Total Price: (${this.state.total})
