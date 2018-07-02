@@ -8,28 +8,33 @@ class App extends Component {
 		this.state = {
 			token: null,
 			loggedIn: false,
+			cart: [
+				{"id": 1, "price": 10, "quantity": 1},
+				{"id": 2, "price": 20, "quantity": 1}
+			]
 		}
 	}
 
 	tokenHandler(e) {
-		e.preventDefault()
 		this.setState({ token: e })
 	}
-	// componentWillMount() {
-	// 	this.checkLoggedIn()
-	// }
-    //
-	// checkLoggedIn = () => {
-	// 	if (this.state.token != null)
-	// 		this.setState({ loggedIn : true })
-	// }
+
+	addToCart(e) {
+		this.state.cart.push(e)
+	}
 
 	render() {
 		return (
 			<div>
-				{this.state.token}
-				<Header token={this.state.token} handler={this.tokenHandler.bind(this)}/>
-				<Main token={this.state.token}/>
+				<Header
+					token={this.state.token}
+					cart={this.state.cart}/>
+				<Main
+					token={this.state.token}
+					cart={this.state.cart}
+					handler={this.tokenHandler.bind(this)}
+					addToCart={this.addToCart.bind(this)}
+				/>
 			</div>
 		)
 	}

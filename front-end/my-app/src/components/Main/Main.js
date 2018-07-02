@@ -11,7 +11,7 @@ import Register from '../Register/Register'
 
 
 class Main extends Component {
-
+	
 	loginPage = (props) => {
 		return (<Login token={this.props.token} handler={this.props.handler}/>)
 	}

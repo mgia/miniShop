@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import axios from 'axios'
-import './styles.css'
+
+// import './styles.css'
 
 class Login extends Component {
 
@@ -16,6 +17,11 @@ class Login extends Component {
 		}
 	}
 
+	// componentWillMount() {
+		// this.changeToken()
+	// }
+
+	// changeToken = {() => this.props.handler("bye")}
 	validateForm = () => {
 		return (this.state.username.length > 0 && this.state.password.length > 0);
 	}
@@ -35,10 +41,9 @@ class Login extends Component {
 				headers: {'Authorization': basicAuth }
 			})
 			.then((res) => {
-				console.log(res)
-				console.log(res.data.token)
 				this.props.handler(res.data.token)
-
+				alert("Login successful")
+				this.setState({ redirect : true })
 			})
 			.catch( (err) => {
 				console.log(err)
@@ -78,7 +83,7 @@ class Login extends Component {
 				</form>
 				<div>
 					<Link to='/register'>Sign up</Link>
-				</div>`
+				</div>
 			</div>
 		)
 	}

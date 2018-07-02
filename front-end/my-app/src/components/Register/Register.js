@@ -18,6 +18,7 @@ class Register extends Component {
 	validateForm = () => {
 		return (this.state.username.length > 5 && this.state.password.length > 5);
 	}
+	
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value});
 	}
