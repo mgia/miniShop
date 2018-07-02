@@ -38,7 +38,6 @@ nav ul li{
 	height: 40px;
 	border: 1px solid black;
 	align-items: center;
-	font-size: 35px;
 }
 .cart{
 	float: right;
@@ -49,10 +48,8 @@ nav ul li{
 	height: 40px;
 	border: 1px solid black;
 	align-items: center;
-
-  }
-
-  .shopbox{
+}
+.shopbox{
 	float: right;
 	margin-top: -250px;
 	margin-right: 93px;
@@ -63,14 +60,14 @@ nav ul li{
 	color: black;
 	text-decoration: none;
 	padding-top: 8px;
-  }
-  .shoptext{
+}
+.shoptext{
 	font-size: 20px;
 	color: black;
 	text-decoration: none;
 	padding-left: 5px;
-  }
-  .loginbox{
+}
+.loginbox{
 	float: right;
 	margin-top: -250px;
 	margin-right: 25px;
@@ -81,10 +78,10 @@ nav ul li{
 	color: black;
 	text-decoration: none;
 	padding-top: 8px;
-  }
-  .logintext {
+}
+.logintext {
 	font-size: 20px;
 	color: black;
 	text-decoration: none;
 	padding-left: 4px;
-  }
+}
