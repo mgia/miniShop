@@ -17,6 +17,7 @@ class Header extends Component {
 	}
 
 	componentWillMount() {
+
 		this.loggedInUser = (
 			<div>
 				<nav>
@@ -68,6 +69,7 @@ class Header extends Component {
 			this.setState({ cart: nextProps.cart})
 		}
 	}
+
 	setNav(token) {
 		if (token) {
 			this.setState({ nav: this.loggedInAdmin })
@@ -76,12 +78,14 @@ class Header extends Component {
 		}
 	}
 
+	// { this.state.token ? this.loggedInAdmin : this.loggedOutMenu}
+
 	render() {
 		return (
 			<header>
 				<div className="header"><Link to='/' className="headertext">cool store name</Link></div>
 				<div>
-					{ this.state.nav }
+					{this.state.nav}
 					<Preview cart={this.props.cart} />
 				</div>
 				<hr/>

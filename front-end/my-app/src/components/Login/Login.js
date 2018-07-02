@@ -27,7 +27,6 @@ class Login extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState({ error : "" })
-		console.log(this.state.username.length + " " + this.state.password.length)
 		if (this.validateForm()) {
 			const url = "http://127.0.0.1:5000/"
 			const option = "login/"
@@ -57,7 +56,7 @@ class Login extends Component {
 
 		return (
 			<div>
-				<h1 className="logint">Login</h1>
+				<h1 className="login">Login</h1>
 				<form onSubmit={this.handleSubmit}>
 					<div>
 						<label>

@@ -21,7 +21,12 @@ class Main extends Component {
 	}
 
 	cartPage = (props) => {
-		return (<Cart token={this.props.token} cart={this.props.cart} removeCartItem={this.props.removeCartItem}/>)
+		return (<Cart
+					token={this.props.token}
+					cart={this.props.cart}
+					removeCartItem={this.props.removeCartItem}
+					clearCart={this.props.clearCart}
+				/>)
 	}
 
 	render() {

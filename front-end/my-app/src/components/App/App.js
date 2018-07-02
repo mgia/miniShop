@@ -29,6 +29,9 @@ class App extends Component {
 		this.setState({cart: newArr})
 	}
 
+	clearCart() {
+		this.setState({cart: []})
+	}
 	render() {
 		return (
 			<div>
@@ -41,6 +44,7 @@ class App extends Component {
 					handler={this.tokenHandler.bind(this)}
 					addToCart={this.addToCart.bind(this)}
 					removeCartItem={this.removeCartItem.bind(this)}
+					clearCart={this.clearCart.bind(this)}
 				/>
 			</div>
 		)
