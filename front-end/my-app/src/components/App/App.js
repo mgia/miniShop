@@ -7,11 +7,14 @@ class App extends Component {
 		super(props)
 		this.state = {
 			token: null,
-			current_user: null,
 			loggedIn: false,
 		}
 	}
 
+	tokenHandler(e) {
+		e.preventDefault()
+		this.setState({ token: e })
+	}
 	// componentWillMount() {
 	// 	this.checkLoggedIn()
 	// }
@@ -24,8 +27,9 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Header loggedIn={this.state.loggedIn}/>
-				<Main />
+				{this.state.token}
+				<Header token={this.state.token} handler={this.tokenHandler.bind(this)}/>
+				<Main token={this.state.token}/>
 			</div>
 		)
 	}

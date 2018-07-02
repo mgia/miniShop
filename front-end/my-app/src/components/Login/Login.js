@@ -16,7 +16,7 @@ class Login extends Component {
 	}
 
 	validateForm = () => {
-		return (this.state.username.length > 5 && this.state.password.length > 5);
+		return (this.state.username.length > 0 && this.state.password.length > 0);
 	}
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value});
@@ -29,13 +29,19 @@ class Login extends Component {
 		if (this.validateForm()) {
 			const url = "http://127.0.0.1:5000/"
 			const option = "login/"
-			axios.post(url + option, { name: this.state.username, password: this.state.password })
-			.then( (res) => {
-				alert("New user created. Please log in.")
-				this.setState({ redirect : true })
+			const basicAuth = 'Basic ' + btoa(this.state.username + ':' + this.state.password)
+			axios.post(url + option, {}, {
+				headers: {'Authorization': basicAuth }
+			})
+			.then((res) => {
+				console.log(res)
+				console.log(res.data.token)
+				this.props.handler(res.data.token)
+
 			})
 			.catch( (err) => {
 				console.log(err)
+				this.setState({ error: "Login failed." })
 			})
 		} else {
 			this.setState({ error : "Error: Username & password must both be 6+ characters." })
@@ -46,39 +52,32 @@ class Login extends Component {
 		const { redirect } = this.state
 
 		if (redirect)
-			return (<Redirect to='/login'></Redirect>)
+			return (<Redirect to='/catalog'></Redirect>)
 
 		return (
 			<div>
-			<h1>Register</h1>
-			<form onSubmit={this.handleSubmit}>
+				<h1>Login</h1>
+				<form onSubmit={this.handleSubmit}>
+					<div>
+						<label>
+							Username:
+							<input type="text" name='username' value={this.state.username} onChange={this.handleChange} />
+						</label>
+					</div>
+					<div>
+						<label>
+							Password:
+							<input type="password" name='password' value={this.state.password} onChange={this.handleChange} />
+						</label>
+					</div>
+					{this.state.error}
+					<div>
+						<input type="submit" value="Sign in" />
+					</div>
+				</form>
 				<div>
-					<label>
-						Username:
-						<input type="text" name='username' value={this.state.username} onChange={this.handleChange} />
-					</label>
-				</div>
-				<div>
-					<label>
-						Password:
-						<input type="password" name='password' value={this.state.password} onChange={this.handleChange} />
-					</label>
-				</div>
-				{this.state.error}
-				<div>
-					<input type="submit" value="Submit" />
-					<Link to='/login'>Cancel</Link>
-				</div>
-			</form>
-			</div>
-		)
-	}
-
-	render() {
-		return (
-			<div>
-				<h2>Login</h2>
-				<Link to='/register'>Sign Up</Link>
+					<Link to='/register'>Sign up</Link>
+				</div>`
 			</div>
 		)
 	}
