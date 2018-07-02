@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import axios from 'axios'
+import './styles.css'
 
 class Login extends Component {
 
@@ -77,8 +78,8 @@ class Login extends Component {
 	render() {
 		return (
 			<div>
-				<h2>Login</h2>
-				<Link to='/register'>Sign Up</Link>
+				<h2 className="logint">Login</h2>
+				<div className="signupbox"><Link to='/register' className="signup" title="Sign Up">Click here to Sign Up</Link></div>
 			</div>
 		)
 	}
