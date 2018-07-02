@@ -11,12 +11,12 @@ class Header extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			token: this.props.token
+			token: this.props.token,
+			cart: this.props.cart
 		}
 	}
 
 	componentWillMount() {
-		console.log(this.props)
 		this.loggedInUser = (
 			<div>
 				<nav>
@@ -52,6 +52,7 @@ class Header extends Component {
 						{/* <li><Link to='/'>Home</Link></li> */}
 						<div className="shopbox"><li><Link to='/catalog' className="shoptext">Shop</Link></li></div>
 						<div className="loginbox"><li><Link to='/login' className="logintext">Login</Link></li></div>
+						<Link to='/cart'><img src={cart} className="cart" alt="shopping cart" title="shopping cart"/></Link>
 					</ul>
 				</nav>
 			</div>
@@ -62,6 +63,9 @@ class Header extends Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.token !== this.state.token) {
 			this.setNav(nextProps.token)
+		}
+		if (nextProps.cart !== this.state.cart) {
+			this.setState({ cart: nextProps.cart})
 		}
 	}
 	setNav(token) {

@@ -8,10 +8,7 @@ class App extends Component {
 		this.state = {
 			token: null,
 			loggedIn: false,
-			cart: [
-				{"id": 1, "price": 10, "quantity": 1},
-				{"id": 2, "price": 20, "quantity": 1}
-			]
+			cart: []
 		}
 	}
 
@@ -20,7 +17,16 @@ class App extends Component {
 	}
 
 	addToCart(e) {
-		this.state.cart.push(e)
+		let newArr = this.state.cart
+		e.quantity = 1
+		newArr.push(e)
+		this.setState({cart: newArr})
+	}
+
+	removeCartItem(id) {
+		let newArr = this.state.cart
+		newArr.splice(id, 1)
+		this.setState({cart: newArr})
 	}
 
 	render() {
@@ -34,6 +40,7 @@ class App extends Component {
 					cart={this.state.cart}
 					handler={this.tokenHandler.bind(this)}
 					addToCart={this.addToCart.bind(this)}
+					removeCartItem={this.removeCartItem.bind(this)}
 				/>
 			</div>
 		)

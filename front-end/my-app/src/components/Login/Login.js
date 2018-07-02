@@ -17,10 +17,6 @@ class Login extends Component {
 		}
 	}
 
-	// componentWillMount() {
-		// this.changeToken()
-	// }
-
 	// changeToken = {() => this.props.handler("bye")}
 	validateForm = () => {
 		return (this.state.username.length > 0 && this.state.password.length > 0);
@@ -83,7 +79,7 @@ class Login extends Component {
 				</form>
 				<div className="signupbox">
 					<Link to='/register' className="signup">Sign up</Link>
-				</div>`
+				</div>
 			</div>
 		)
 	}
