@@ -5,23 +5,21 @@ import Main from '../Main/Main'
 class App extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			token: null,
+			current_user: null,
+			loggedIn: false,
+		}
 	}
 
-	componentWillMount() {
-		this.initState()
-		this.checkLoggedIn()
-	}
-
-	initState() {
-		this.setState({ token : "1123123", loggedIn : false })
-	}
-
-	checkLoggedIn() {
-		console.log(this.state.token)
-		if (this.state.token != null)
-			this.setState({ loggedIn : true })
-	}
+	// componentWillMount() {
+	// 	this.checkLoggedIn()
+	// }
+    //
+	// checkLoggedIn = () => {
+	// 	if (this.state.token != null)
+	// 		this.setState({ loggedIn : true })
+	// }
 
 	render() {
 		return (
