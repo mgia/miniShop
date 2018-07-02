@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import axios from 'axios'
+import './styles.css'
 
 class Login extends Component {
 
