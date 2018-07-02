@@ -1,0 +1,12 @@
+.preview{
+    float: right;
+    width: 180px;
+    height: 70px;
+    border: 1px solid black;
+    padding-left: 30px;
+    padding-top: 17px;
+    padding-bottom: 13px;
+    font-size: 120%;
+    margin-top: -180px;
+    margin-right: 25px;
+}
