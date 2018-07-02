@@ -2,6 +2,7 @@ nav ul li{
 	list-style: none;
 }
 .header {
+<<<<<<< HEAD
 	border: 1px solid black;
 	height: 235px;
 	width: 235px;
@@ -39,6 +40,9 @@ nav ul li{
 	border: 1px solid black;
 	align-items: center;
 	
+=======
+	font-size: 35px;
+>>>>>>> 5f5125307ecdee12d605182603e4d2c77338100b
 }
 .cart{
 	float: right;

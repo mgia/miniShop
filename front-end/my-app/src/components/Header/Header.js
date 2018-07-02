@@ -58,7 +58,7 @@ class Header extends Component {
 
 
 	setNav() {
-		const loggedIn = true
+		const loggedIn = this.props.LoggedIn
 		if (loggedIn) {
 			this.setState({ nav: this.loggedInAdmin })
 		} else {

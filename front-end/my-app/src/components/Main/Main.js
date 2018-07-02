@@ -7,6 +7,7 @@ import Catalog from '../Catalog/Catalog'
 import Profile from '../Profile/Profile'
 import Cart from '../Cart/Cart'
 import Admin from '../Admin/Admin'
+import Register from '../Register/Register'
 
 const Main = () => (
 	<main>
@@ -17,6 +18,7 @@ const Main = () => (
 			<Route path='/profile' component={Profile}/>
 			<Route path='/cart' component={Cart}/>
 			<Route path='/admin' component={Admin}/>
+			<Route path='/register' component={Register}/>
 		</Switch>
 	</main>
 )
