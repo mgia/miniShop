@@ -83,7 +83,7 @@ class Header extends Component {
 	render() {
 		return (
 			<header>
-				<div className="header"><Link to='/' className="headertext">cool store name</Link></div>
+				<div className="header"><Link to='/' className="headertext">ok store name</Link></div>
 				<div>
 					{this.state.nav}
 					<Preview cart={this.props.cart} />

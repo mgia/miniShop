@@ -71,7 +71,7 @@ class Login extends Component {
 						</label>
 					</div>
 					<div className="errormsg">
-					{this.state.error}
+					{this.state.error}<br/>
 					</div>
 					<div>
 						<input className="signin" type="submit" value="Sign in" />

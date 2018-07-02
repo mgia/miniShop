@@ -1,6 +1,7 @@
 import React, { Component, } from 'react'
 import { Redirect } from 'react-router'
 import axios from 'axios'
+import './styles.css'
 
 class Cart extends Component {
 	constructor(props) {
@@ -40,7 +41,7 @@ class Cart extends Component {
 			return (<Redirect to='/catalog'></Redirect>)
 
 		if (this.state.cart.length === 0) {
-			return <div>No items in cart. Go shop!</div>
+			return <div className="noitems">No items in cart. Go shop!</div>
 		} else {
 			return (
 				<div>
