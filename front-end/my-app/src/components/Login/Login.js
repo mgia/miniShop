@@ -62,7 +62,7 @@ class Login extends Component {
 
 		return (
 			<div>
-				<h1>Login</h1>
+				<h1 className="logint">Login</h1>
 				<form onSubmit={this.handleSubmit}>
 					<div>
 						<label>
@@ -81,9 +81,9 @@ class Login extends Component {
 						<input type="submit" value="Sign in" />
 					</div>
 				</form>
-				<div>
-					<Link to='/register'>Sign up</Link>
-				</div>
+				<div className="signupbox">
+					<Link to='/register' className="signup">Sign up</Link>
+				</div>`
 			</div>
 		)
 	}
