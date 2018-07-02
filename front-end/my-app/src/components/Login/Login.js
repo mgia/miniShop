@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import axios from 'axios'
-
-// import './styles.css'
+import './styles.css'
 
 class Login extends Component {
 
@@ -76,14 +75,16 @@ class Login extends Component {
 							<input type="password" name='password' value={this.state.password} onChange={this.handleChange} />
 						</label>
 					</div>
+					<div className="errormsg">
 					{this.state.error}
+					</div>
 					<div>
-						<input type="submit" value="Sign in" />
+						<input className="signin" type="submit" value="Sign in" />
 					</div>
 				</form>
-				<div className="signupbox">
-					<Link to='/register' className="signup">Sign up</Link>
-				</div>`
+					<div className="signupbox">
+					<Link to='/register' className="signup">Sign up</Link><br/>
+					</div>
 			</div>
 		)
 	}

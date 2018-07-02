@@ -67,12 +67,16 @@ class Register extends Component {
 						<input type="password" name='password' value={this.state.password} onChange={this.handleChange} />
 					</label>
 				</div>
-				{this.state.error}
+				<div className="errormsg">
+					{this.state.error}
+				</div>
 				<div>
-					<input type="submit" value="Submit" />
-					<Link to='/login'>Cancel</Link>
+					<input className="submit" type="submit" value="Submit" />
 				</div>
 			</form>
+				<div className="cancelbox">
+					<Link to='/login' className="cancel">Cancel</Link>
+					</div>
 			</div>
 			</div>
 		)
