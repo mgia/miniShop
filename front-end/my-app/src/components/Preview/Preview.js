@@ -14,8 +14,8 @@ class Preview extends Component {
 	changePrice = (cart) => {
 		let amount = cart.length
 		let total = 0
-		cart.map(function (item) {
-			total += (item.quantity * item.price)
+		cart.forEach(function (item) {
+			total += (item.price)
 		})
 		this.setState({ amount: amount, total: total })
 	}
@@ -32,6 +32,7 @@ class Preview extends Component {
 				<b>Cart Preview</b><br/>
 				Number of Items: {this.state.amount}<br/>
 				Total Price: (${this.state.total})
+				{this.state.cart}
 			</div>
 		)
 	}
