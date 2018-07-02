@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import axios from 'axios'
+import './styles.css'
 
 class Register extends Component {
 
@@ -50,8 +51,9 @@ class Register extends Component {
 
 		return (
 			<div>
-			<h1>Register</h1>
-			<form onSubmit={this.handleSubmit}>
+			<h1 className="registert">Register</h1>
+			<div>
+			<form onSubmit={this.handleSubmit} >
 				<div>
 					<label>
 						Username:
@@ -70,6 +72,7 @@ class Register extends Component {
 					<Link to='/login'>Cancel</Link>
 				</div>
 			</form>
+			</div>
 			</div>
 		)
 	}
