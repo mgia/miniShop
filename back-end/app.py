@@ -1,8 +1,11 @@
 from flask import Flask, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
-import uuid
-from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
+# Public id generation
+import uuid
+# Password hashing
+from werkzeug.security import generate_password_hash, check_password_hash
+# Token generation
 import jwt
 import datetime
 
@@ -12,6 +15,7 @@ app.config['SECRET_KEY'] = 'thisisecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////nfs/2017/m/mtan/projects/php/github/back-end/test.db'
 
 db = SQLAlchemy(app)
+
 # Data models
 class User(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
@@ -42,6 +46,7 @@ class ItemCategory(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	category_id = db.Column(db.Integer)
 	item_id = db.Column(db.Integer)
+
 
 # Tokenization
 def token_required(f):
@@ -525,5 +530,3 @@ def delete_itemcategory(current_user, id):
 
 if __name__ == '__main__':
 	app.run(debug=True)
-
-db.create_all()
