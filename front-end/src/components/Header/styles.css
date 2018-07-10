@@ -1,0 +1,96 @@
+nav ul li{
+	list-style: none;
+}
+h1 {
+	margin-top: 20px;
+    margin-left: 10%;
+    width: 200px;
+    font-size: 35px;
+    font-style: normal;
+    font-family: Helvetica, sans-serif;
+    text-align: left;
+}
+.header {
+	border: 1px solid black;
+	height: 235px;
+	width: 235px;
+	margin-top: 20px;
+	margin-right: auto;
+	margin-left: 10%;
+	font-size: 75px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	font-family: Helvetica, sans-serif;
+	text-decoration: none;
+}
+.headertext{
+	font-family: Helvetica, sans-serif;
+	text-decoration: none;
+	color: black;
+}
+.admincrown{
+	float: right;
+	margin-top: -250px;
+	margin-right: 261px;
+	padding-right: 0px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	align-items: center;
+}
+.profile{
+	float: right;
+	margin-top: -250px;
+	margin-right: 211px;
+	padding-right: 0px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	align-items: center;
+}
+.cart{
+	float: right;
+	margin-top: -250px;
+	margin-right: 161px;
+	padding-right: 0px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	align-items: center;
+}
+.shopbox{
+	float: right;
+	margin-top: -250px;
+	margin-right: 93px;
+	padding-right: 0px;
+	width: 58px;
+	height: 32px;
+	border: 1px solid black;
+	color: black;
+	text-decoration: none;
+	padding-top: 8px;
+}
+.shoptext{
+	font-size: 20px;
+	color: black;
+	text-decoration: none;
+	padding-left: 5px;
+}
+.loginbox{
+	float: right;
+	margin-top: -250px;
+	margin-right: 25px;
+	padding-right: 0px;
+	width: 58px;
+	height: 32px;
+	border: 1px solid black;
+	color: black;
+	text-decoration: none;
+	padding-top: 8px;
+}
+.logintext {
+	font-size: 20px;
+	color: black;
+	text-decoration: none;
+	padding-left: 4px;
+}
