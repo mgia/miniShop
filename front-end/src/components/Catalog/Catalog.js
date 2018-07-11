@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import './styles.css'
+import store from "../../store"
+
+const addToCart = (item) => ({type: "ADD_ITEM", item})
 
 class Catalog extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			error: null,
-			isLoaded: false,
-			items: []
-		};
+
+	state = {
+		error: null,
+		isLoaded: false,
+		items: []
 	}
 
-	componentDidMount() {
+	getItems = () => {
 		const url = "http://127.0.0.1:5000/"
 		const option = "item/"
 		axios.get(url + option, {}, {})
@@ -31,6 +32,14 @@ class Catalog extends Component {
 		})
 	}
 
+	addItem = (item) => {
+		store.dispatch(addToCart(item))
+	}
+
+	componentDidMount() {
+		this.getItems()
+	}
+
 	render() {
 		const { error, isLoaded, items } = this.state;
 		if (error) {
@@ -41,9 +50,9 @@ class Catalog extends Component {
 			return (
 				<div>
 				{items.map( (item, i, obj) => (
-					<div key={i}><img className="imageSize" src={item.image_url}/><br/>
+					<div key={i}><img className="imageSize" alt="img" src={item.image_url}/><br/>
 					{item.name} {item.price} {item.description}
-					<button onClick={() => this.props.addToCart(item) }>Add to Cart</button>
+					<button onClick={() => this.addItem(item) }>Add to Cart</button>
 					</div>
 				))}
 				</div>

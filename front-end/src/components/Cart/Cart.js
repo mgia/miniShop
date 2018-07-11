@@ -2,18 +2,20 @@ import React, { Component, } from 'react'
 import { Redirect } from 'react-router'
 import axios from 'axios'
 import './styles.css'
+import store from "../../store"
 
 class Cart extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			cart: this.props.cart,
-			redirect: false
-		}
+
+	state = {
+		redirect: false,
+		// cart: []
 	}
 
 	sendOrder = () => {
-		if (!this.props.token)
+
+		const token = store.getState().token
+
+		if (!token)
 			return
 		const url = "http://127.0.0.1:5000/"
 		const option = "order/"
@@ -21,7 +23,7 @@ class Cart extends Component {
 			"orders": this.state.cart
 		}
 		axios.post(url + option, {}, {
-			headers: {'x-access-token': this.props.token }
+			headers: {'x-access-token': token }
 		})
 		.then((res) => {
 			alert("Order successful")
@@ -34,24 +36,38 @@ class Cart extends Component {
 		this.props.clearCart()
 	}
 
+	removeCartItem = (id) => {
+		store.dispatch({type: "REMOVE_ITEM", id})
+	}
+
+	getCart = () => {
+		const cart = store.getState().cart
+		this.setState({cart: cart})
+	}
+
+	componentWillMount() {
+		this.getCart()
+		store.subscribe(this.getCart)
+	}
+
 	render() {
-		const { redirect } = this.state
+		const { redirect, cart } = this.state
 
 		if (redirect)
 			return (<Redirect to='/catalog'></Redirect>)
 
-		if (this.state.cart.length === 0) {
+		if (cart.length === 0) {
 			return <div className="noitems">No items in cart. Go shop!</div>
 		} else {
 			return (
 				<div>
 				<button onClick={this.sendOrder()}>Send order</button>
 				{this.state.cart.map( (item, i, obj) => (
-					<div key={i}><img alt={item.desciption} className="imageSize" src={item.image_url}/><br/>
+					<div key={i}><img alt={item.desciption} className="image mnSize" src={item.image_url}/><br/>
 					{item.name}<br/>
 					{item.price}<br/>
 					{item.description}
-					<button onClick={() => this.props.removeCartItem(i) }>Remove from Cart</button>
+					<button onClick={() => this.removeCartItem(i) }>Remove from Cart</button>
 					</div>
 				))}
 				</div>

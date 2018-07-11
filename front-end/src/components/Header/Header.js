@@ -45,7 +45,6 @@ class Header extends Component {
 	}
 
 	setNav = () => {
-
 		if (store.getState().token) {
 			this.setState({ nav: this.loggedIn })
 		} else {
@@ -67,4 +66,5 @@ class Header extends Component {
 		)
 	}
 }
+
 export default Header
