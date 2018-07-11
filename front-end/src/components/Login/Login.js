@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router'
 import axios from 'axios'
 import './styles.css'
+import store from '../../store'
 
+const setToken = (token) => ({type: "SET_TOKEN", token});
 class Login extends Component {
 
 	constructor(props) {
@@ -35,7 +37,7 @@ class Login extends Component {
 				headers: {'Authorization': basicAuth }
 			})
 			.then((res) => {
-				this.props.handler(res.data.token)
+				store.dispatch(setToken(res.data.token))
 				alert("Login successful")
 				this.setState({ redirect : true })
 			})

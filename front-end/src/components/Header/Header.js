@@ -5,38 +5,19 @@ import profile from '../../img/profile.png'
 import admincrown from '../../img/admincrown.png'
 import './styles.css'
 import Preview from '../Preview/Preview'
+import store from '../../store'
 
 class Header extends Component {
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			token: this.props.token,
-			cart: this.props.cart
-		}
+	state = {
+		cart: this.props.cart,
+		nav: null
 	}
 
-	componentWillMount() {
-
-		this.loggedInUser = (
+	loggedIn = (
 			<div>
 				<nav>
 					<ul>
-						{/* <li><Link to='/'>Home</Link></li> */}
-						<div className="shopbox"><li><Link to='/catalog' className="shoptext">Shop</Link></li></div>
-						<div className="loginbox"><li><Link to='/login' className="logintext">Login</Link></li></div>
-						<li><Link to='/cart'><img src={cart} className="cart" alt="shopping cart" title="shopping cart"/></Link></li>
-						<li><Link to='/profile'><img src={profile} className="profile" alt="my profile" title="my profile"/></Link></li>
-					</ul>
-				</nav>
-			</div>
-		)
-
-		this.loggedInAdmin = (
-			<div>
-				<nav>
-					<ul>
-						{/* <li><Link to='/'>Home</Link></li> */}
 						<div className="shopbox"><li><Link to='/catalog' className="shoptext">Shop</Link></li></div>
 						<li><Link to='/admin'><img src={admincrown} className="admincrown" alt="admin" title="admin"/></Link></li>
 						<li><Link to='/cart'><img src={cart} className="cart" alt="shopping cart" title="shopping cart"/></Link></li>
@@ -44,41 +25,34 @@ class Header extends Component {
 					</ul>
 				</nav>
 			</div>
-		)
+	)
 
-		this.loggedOutMenu = (
-			<div>
-				<nav>
-					<ul>
-						{/* <li><Link to='/'>Home</Link></li> */}
-						<div className="shopbox"><li><Link to='/catalog' className="shoptext">Shop</Link></li></div>
-						<div className="loginbox"><li><Link to='/login' className="logintext">Login</Link></li></div>
-						<Link to='/cart'><img src={cart} className="cart" alt="shopping cart" title="shopping cart"/></Link>
-					</ul>
-				</nav>
-			</div>
-		)
-		this.setNav(this.state.token)
+	loggedOut = (
+		<div>
+			<nav>
+				<ul>
+					<div className="shopbox"><li><Link to='/catalog' className="shoptext">Shop</Link></li></div>
+					<div className="loginbox"><li><Link to='/login' className="logintext">Login</Link></li></div>
+					<Link to='/cart'><img src={cart} className="cart" alt="shopping cart" title="shopping cart"/></Link>
+				</ul>
+			</nav>
+		</div>
+	)
+
+	componentWillMount() {
+		this.setNav()
+		store.subscribe(this.setNav)
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.token !== this.state.token) {
-			this.setNav(nextProps.token)
-		}
-		if (nextProps.cart !== this.state.cart) {
-			this.setState({ cart: nextProps.cart})
-		}
-	}
+	setNav = () => {
 
-	setNav(token) {
-		if (token) {
-			this.setState({ nav: this.loggedInAdmin })
+		if (store.getState().token) {
+			this.setState({ nav: this.loggedIn })
 		} else {
-			this.setState({ nav: this.loggedOutMenu })
+			this.setState({ nav: this.loggedOut })
+
 		}
 	}
-
-	// { this.state.token ? this.loggedInAdmin : this.loggedOutMenu}
 
 	render() {
 		return (
