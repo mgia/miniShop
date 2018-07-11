@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import './styles.css'
+import store from '../../store'
 
 class Preview extends Component {
 
-	constructor(props) {
-		super(props)
-		this.state = {
-			cart: [],
-			total: 0,
-			amount: 0
-		}
+	state = {
+		total: 0,
+		amount: 0
 	}
 
-	changePrice = (cart) => {
+	changePrice = () => {
+		const cart = store.getState().cart
 		let amount = cart.length
 		let total = 0
 		cart.forEach(function (item) {
@@ -21,10 +19,8 @@ class Preview extends Component {
 		this.setState({ amount: amount, total: total })
 	}
 
-	componentWillReceiveProps(nextProps) {
-		if (nextProps.cart !== this.state.cart) {
-			this.changePrice(nextProps.cart)
-		}
+	componentWillMount() {
+		store.subscribe(this.changePrice)
 	}
 
 	render() {
@@ -33,7 +29,6 @@ class Preview extends Component {
 				<b>Cart Preview</b><br/>
 				Number of Items: {this.state.amount}<br/>
 				Total Price: (${this.state.total})
-				{this.state.cart}
 			</div>
 		)
 	}
