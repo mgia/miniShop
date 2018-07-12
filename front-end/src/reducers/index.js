@@ -13,11 +13,16 @@ export default (state, action) => {
 				cart: newCart
 			}
 		case "REMOVE_ITEM":
-			var newCart = state.cart
-			newCart.splice(action.id, 1)
+			const newCart1 = state.cart
+			newCart1.splice(action.id, 1)
 			return {
 				...state,
-				cart: newCart
+				cart: newCart1
+			}
+		case "CLEAR_CART":
+			return {
+				...state,
+				cart: []
 			}
 		default:
 			return state

@@ -20,15 +20,6 @@ class Main extends Component {
 		return (<Catalog addToCart={this.props.addToCart} />)
 	}
 
-	cartPage = (props) => {
-		return (<Cart
-					token={this.props.token}
-					cart={this.props.cart}
-					removeCartItem={this.props.removeCartItem}
-					clearCart={this.props.clearCart}
-				/>)
-	}
-
 	render() {
 		return (
 		<main>
@@ -37,7 +28,7 @@ class Main extends Component {
 				<Route path='/login' component={this.loginPage}/>
 				<Route path='/catalog' component={this.catalogPage}/>
 				<Route path='/profile' component={Profile}/>
-				<Route path='/cart' component={this.cartPage}/>
+				<Route path='/cart' component={Cart}/>
 				<Route path='/admin' component={Admin}/>
 				<Route path='/register' component={Register}/>
 			</Switch>

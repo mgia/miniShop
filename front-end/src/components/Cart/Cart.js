@@ -8,36 +8,39 @@ class Cart extends Component {
 
 	state = {
 		redirect: false,
-		// cart: []
+		error: ""
 	}
 
 	sendOrder = () => {
 
-		const token = store.getState().token
+		const state = store.getState()
 
-		if (!token)
-			return
-		const url = "http://127.0.0.1:5000/"
-		const option = "order/"
-		const data = {
-			"orders": this.state.cart
+		if (!state.token)
+			alert("Please log in!")
+		else {
+			const url = "http://127.0.0.1:5000/"
+			const option = "order"
+			const data = {
+				"orders": state.cart
+			}
+			axios.post(url + option, data, {
+				headers: {'x-access-token': state.token }
+			})
+			.then((res) => {
+				alert("Order successful")
+				store.dispatch({ type: "CLEAR_CART" })
+				this.setState({ redirect : true })
+			})
+			.catch((err) => {
+				console.log(err)
+				this.setState({ error: "Login failed." })
+			})
 		}
-		axios.post(url + option, {}, {
-			headers: {'x-access-token': token }
-		})
-		.then((res) => {
-			alert("Order successful")
-			this.setState({ redirect : true })
-		})
-		.catch( (err) => {
-			console.log(err)
-			this.setState({ error: "Login failed." })
-		})
-		this.props.clearCart()
 	}
 
 	removeCartItem = (id) => {
 		store.dispatch({type: "REMOVE_ITEM", id})
+		this.getCart()
 	}
 
 	getCart = () => {
@@ -47,7 +50,6 @@ class Cart extends Component {
 
 	componentWillMount() {
 		this.getCart()
-		store.subscribe(this.getCart)
 	}
 
 	render() {
@@ -61,7 +63,7 @@ class Cart extends Component {
 		} else {
 			return (
 				<div>
-				<button onClick={this.sendOrder()}>Send order</button>
+				<button onClick={() => this.sendOrder()}>Send order</button>
 				{this.state.cart.map( (item, i, obj) => (
 					<div key={i}><img alt={item.desciption} className="image mnSize" src={item.image_url}/><br/>
 					{item.name}<br/>

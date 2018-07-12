@@ -399,9 +399,8 @@ def create_order(current_user):
 
 	data = request.get_json()
 	time = datetime.datetime.utcnow()
-
 	for item in data['orders']:
-		new_order = Order(user_id=current_user.id, item_id=item['id'], quantity=item['quantity'], timestamp=time)
+		new_order = Order(user_id=current_user.id, item_id=item['id'], quantity=1, timestamp=time)
 		db.session.add(new_order)
 	db.session.commit()
 
