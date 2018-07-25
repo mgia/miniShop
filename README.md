@@ -23,6 +23,7 @@ My API server has the following features:
 - JWT tokenization for stateless session management
 
 My front-end webpage has the following features:
+- State management with Redux
 - Login and register page for existing / new users
 - Item catalog with `add to cart` feature
 - Cart preview displaying total amount and number of items
@@ -55,7 +56,13 @@ Also, in certain browsers like Chrome, localhost CORS requests are disallowed by
 ## Built With
 
 * [React](https://reactjs.org/) - Front-end web framework used
+* [Redux](https://redux.js.org/) - State management framework used
 * [Flask](http://flask.pocoo.org/) - API server framework used
 
 ## Notes
+Due to time constraints, I was unable to complete the categories feature. However, the back-end structure is already set in place, with specific category endpoints returning a list of indexes corresponding to matching items. Items which are stored within cache can then be used to hydrate the list and update the list shown on the catalog page.
+
+## Author
+* **Marc G Tan** - mtan
+* **Abraham Chan** - abchan
 
